@@ -49,8 +49,8 @@ void loop() {
   }else if (angle <= 0){
     change = 1;
   }
-  servo1.write(angle + change);
-  
+  servo1.write(angle += change);
+  delay(15);
 }
 
 
