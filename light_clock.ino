@@ -40,6 +40,8 @@ void loop() {
   if (irrecv.decode(&results)){
     command_val = results.value;
     Serial.println(command_val, HEX);
+
+    //set state from input command
     switch (command_val){
       case 0xFFA25D:
         //power: unsure of behaviour
@@ -61,22 +63,19 @@ void loop() {
     }
     irrecv.resume();
   }
+
+  //determine action to take
   switch (state){
     case transition_on:
-      if (angle < 180){
-        servo1.write(angle += 1);
-        delay(15);
-      }else {
-        state = on;
-      }
+      servo1.write(180);
+      delay(30);
+      state = on;
       break;
     case transition_off:
-      if (angle > 0){
-        servo1.write(angle -= 1);
-        delay(15);
-      }else {
-        state = off;
-      }
+      servo1.write(0);
+      delay(30);
+      servo1.write(90);
+      state = off;
       break;
     case on:
     case off:
