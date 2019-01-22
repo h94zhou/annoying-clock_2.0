@@ -57,6 +57,14 @@ void loop() {
         if (state == off){
           state = transition_on;
         }
+        break;
+      case 0xFF02FD:
+        //play/pause - toggle servo
+        if (state == off){
+          state = transition_on;
+        }else if (state == on) {
+          state = transition_off;
+        }
       default:
         //no input
         break;
